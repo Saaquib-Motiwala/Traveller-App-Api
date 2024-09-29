@@ -1,40 +1,40 @@
-STATE_ID,STATE_NAME
-297585,Andhra Pradesh
-297589,Arunachal Pradesh
-297590,Assam
-297591,Bihar
-297594,Chhattisgarh
-297604,Goa
-297607,Gujarat
-297614,Haryana
-297617,Himachal Pradesh
-297626,Jharkhand
-297627,Karnataka
-297631,Kerala
-297646,Madhya Pradesh
-297648,Maharashtra
-297656,Manipur
-297657,Meghalaya
-297658,Mizoram
-297659,Nagaland
-297660,Odisha
-297663,Punjab
-297665,Rajasthan
-297673,Sikkim
-297674,Tamil Nadu
-7058854,Telangana
-297681,Tripura
-297682,Uttar Pradesh
-297686,Uttarakhand
-297692,West Bengal
-297583,Andaman and Nicobar Islands
-297596,Chandigarh
-297597,Dadra and Nagar Haveli
-297601,Diu
-297600,Daman
-297640,Lakshadweep
-940855,Delhi
-659792,Pondicherry
-297624,Ladakh
-297620,Jammu City
-297622,Kashmir
+STATE_ID,STATE_NAME,STATE_INFO,STATE_IMAGE
+297585,Andhra Pradesh,,
+297589,Arunachal Pradesh,,
+297590,Assam,Hello,Hello
+297591,Bihar,,
+297594,Chhattisgarh,,
+297604,Goa,,
+297607,Gujarat,,
+297614,Haryana,,
+297617,Himachal Pradesh,,
+297626,Jharkhand,,
+297627,Karnataka,,
+297631,Kerala,,
+297646,Madhya Pradesh,,
+297648,Maharashtra,,
+297656,Manipur,,
+297657,Meghalaya,,
+297658,Mizoram,,
+297659,Nagaland,,
+297660,Odisha,,
+297663,Punjab,,
+297665,Rajasthan,,
+297673,Sikkim,,
+297674,Tamil Nadu,,
+7058854,Telangana,,
+297681,Tripura,,
+297682,Uttar Pradesh,,
+297686,Uttarakhand,,
+297692,West Bengal,,
+297583,Andaman and Nicobar Islands,,
+297596,Chandigarh,,
+297597,Dadra and Nagar Haveli,,
+297601,Diu,,
+297600,Daman,,
+297640,Lakshadweep,,
+940855,Delhi,,
+659792,Pondicherry,,
+297624,Ladakh,,
+297620,Jammu City,,
+297622,Kashmir,,
