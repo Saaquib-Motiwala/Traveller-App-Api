@@ -4,14 +4,14 @@ import json
 import requests
 
 def get_states_list():
-    states_list = pd.read_csv("states_id.csv").to_dict(orient="split")
+    states_list = pd.read_csv("states_info.csv").to_dict(orient="split")
     states_list = [[i[0], i[1]] for i in states_list["data"]]
     return states_list
 
 
 def get_state_data(state_id):
     attr_df = pd.read_csv("attraction_details_2.csv")
-    state_df = pd.read_csv("states_id.csv")
+    state_df = pd.read_csv("states_info.csv")
     state_name = state_df.loc[state_df["STATE_ID"] == state_id, "STATE_NAME"].values[0]
     state_info = state_df.loc[state_df["STATE_ID"] == state_id, "STATE_INFO"].values[0]
     state_image = state_df.loc[state_df["STATE_ID"] == state_id, "STATE_IMAGE"].values[0]
