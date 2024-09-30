@@ -5,7 +5,8 @@ import requests
 
 def get_states_list():
     states_list = pd.read_csv("states_id.csv").to_dict(orient="split")
-    return states_list["data"]
+    states_list = [[i[0], i[1]] for i in states_list["data"]]
+    return states_list
 
 
 def get_state_data(state_id):
