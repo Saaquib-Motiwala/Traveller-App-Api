@@ -31,11 +31,9 @@ def get_attr_details(attr_id):
     attr.loc[:, "tags"] = attr["tags"].apply(lambda x: literal_eval(x))
     attr.loc[:, "reviews"] = attr["reviews"].apply(lambda x: literal_eval(x))
     attr_dict = attr.to_dict(orient="records")[0]
-    # attr_dict = json.loads(attr_dict)
-    weather = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={attr_dict['lat']}&longitude={attr_dict['long']}&current=")
-    print(weather.content)
-    return attr_dict["lat"]
+    attr_dict = json.dumps(attr_dict)
+    return attr_dict
 
 
 if __name__ == "__main__":
-    print(get_states_list())
+    print(get_attr_details(1749401))
