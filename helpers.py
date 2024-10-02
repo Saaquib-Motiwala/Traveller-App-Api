@@ -18,9 +18,7 @@ def get_state_data(state_id):
     state_info = filtered_state["STATE_INFO"].values[0]
     state_image = filtered_state["STATE_IMAGE"].values[0]
     attr_filtered = attr_df[attr_df["state_id"] == state_id]
-    attr_filtered = attr_filtered[["id", "name", "images"]]
-    attr_filtered["images"] = attr_filtered["images"].apply(lambda x: literal_eval(x))
-    attr_filtered["images"] = attr_filtered["images"].apply(lambda x: x[0])
+    attr_filtered = attr_filtered[["id", "name", "cover_img"]]
     attr_filtered_dict = attr_filtered.to_dict(orient="records")
     return {"state_data": {"state_name": state_name, "state_capital": state_capital, "state_info": state_info, "state_image": state_image}, "attr_data": attr_filtered_dict}
 
@@ -31,9 +29,8 @@ def get_attr_details(attr_id):
     attr.loc[:, "tags"] = attr["tags"].apply(lambda x: literal_eval(x))
     attr.loc[:, "reviews"] = attr["reviews"].apply(lambda x: literal_eval(x))
     attr_dict = attr.to_dict(orient="records")[0]
-    # attr_dict = json.dumps(attr_dict)
     return attr_dict
 
 
 if __name__ == "__main__":
-    print(get_attr_details(1749401))
+    print(get_attr_details(25555680)["reviews"])
