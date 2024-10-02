@@ -10,7 +10,7 @@ def get_states_list():
 
 
 def get_state_data(state_id):
-    attr_df = pd.read_csv("attraction_details_2.csv")
+    attr_df = pd.read_csv("attraction_details.csv")
     state_df = pd.read_csv("states_info.csv")
     filtered_state = state_df.loc[state_df["STATE_ID"] == state_id]
     state_name = filtered_state["STATE_NAME"].values[0]
@@ -25,13 +25,13 @@ def get_state_data(state_id):
     return {"state_data": {"state_name": state_name, "state_capital": state_capital, "state_info": state_info, "state_image": state_image}, "attr_data": attr_filtered_dict}
 
 def get_attr_details(attr_id):
-    attr_df = pd.read_csv("attraction_details_2.csv")
+    attr_df = pd.read_csv("attraction_details.csv")
     attr = attr_df.loc[attr_df["id"] == attr_id]
     attr.loc[:, "images"] = attr["images"].apply(lambda x: literal_eval(x))
     attr.loc[:, "tags"] = attr["tags"].apply(lambda x: literal_eval(x))
     attr.loc[:, "reviews"] = attr["reviews"].apply(lambda x: literal_eval(x))
     attr_dict = attr.to_dict(orient="records")[0]
-    attr_dict = json.dumps(attr_dict)
+    # attr_dict = json.dumps(attr_dict)
     return attr_dict
 
 
