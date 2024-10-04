@@ -35,7 +35,7 @@ def get_recommended_attr():
     lst = [317329, 319875, 311667, 319695, 2704519, 12687575, 320061, 321437, 2697362, 1491020]
     attr_df = pd.read_csv("attraction_details.csv")
     recomm_attr = attr_df.loc[attr_df['id'].isin(lst)]
-    recomm_dict = recomm_attr.to_dict(orient="records")[0]
+    recomm_dict = recomm_attr.to_dict(orient="records")
     return recomm_dict
 
 
