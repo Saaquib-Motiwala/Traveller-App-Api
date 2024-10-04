@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from helpers import get_states_list, get_state_data, get_attr_details
+from helpers import get_states_list, get_state_data, get_attr_details, get_recommended_attr
 
 app = FastAPI()
 
@@ -18,6 +18,11 @@ async def states():
     states_list = get_states_list()
     return {"data": states_list}
 
+@app.get("/recommended_attr/")
+async def states():
+    recomm_dict = get_recommended_attr()
+    return {"data": recomm_dict}
+
 @app.get("/states/{state_id}")
 async def states(state_id: int):
     state_data = get_state_data(state_id)
@@ -27,6 +32,7 @@ async def states(state_id: int):
 async def attractions(attr_id: int):
     attr_details = get_attr_details(attr_id)
     return {"data": attr_details}
+
 
 
 

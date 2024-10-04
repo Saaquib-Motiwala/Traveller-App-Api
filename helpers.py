@@ -31,6 +31,15 @@ def get_attr_details(attr_id):
     attr_dict = attr.to_dict(orient="records")[0]
     return attr_dict
 
+def get_recommended_attr():
+    lst = [317329, 319875, 311667, 319695, 2704519, 12687575, 320061, 321437, 2697362, 1491020]
+    attr_df = pd.read_csv("attraction_details.csv")
+    recomm_attr = attr_df.loc[attr_df['id'].isin(lst)]
+    recomm_dict = recomm_attr.to_dict(orient="records")[0]
+    return recomm_dict
+
+
 
 if __name__ == "__main__":
-    print(get_attr_details(25555680)["reviews"])
+    # print(get_attr_details(25555680)["reviews"])
+    print(get_recommended_attr())
