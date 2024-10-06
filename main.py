@@ -26,9 +26,9 @@ async def states():
     return {"data": recomm_dict}
 
 
-@app.get("/search/{query}")
-async def search(query: str):
-    search_res = dr.get_search_result(query)
+@app.get("/search/query={query}&type={type}")
+async def search(query: str, type: str):
+    search_res = dr.get_search_result(query, type)
     return {"data": search_res}
 
 

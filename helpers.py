@@ -39,14 +39,33 @@ class DataRetriever:
         recomm_dict = recomm_attr.to_dict(orient="records")
         return recomm_dict
 
-    def get_search_result(self, query):
-        search_res = self.attr_df[self.attr_df["name"].str.contains(query, case=False)].to_dict(orient="records")
+    def get_search_result(self, query, type):
+        if type == "all":
+            state_search_res = self.state_df[self.state_df["STATE_NAME"].str.contains(query, case=False)]
+            if not state_search_res.empty:
+                state_search_res.loc[:, "type"] = "state"
+            state_search_res = state_search_res.to_dict(orient="records")
+
+            attr_search_res = self.attr_df[self.attr_df["name"].str.contains(query, case=False)]
+            if not attr_search_res.empty:
+                attr_search_res.loc[:, "type"] = "attraction"
+            attr_search_res = attr_search_res.to_dict(orient="records")
+            search_res = state_search_res + attr_search_res
+
+        elif type == "state":
+            search_res = self.state_df[self.state_df["STATE_NAME"].str.contains(query, case=False)]
+            if not search_res.empty:
+                search_res.loc[:, "type"] = "state"
+            search_res = search_res.to_dict(orient="records")
+        else:
+            search_res = self.attr_df[self.attr_df["name"].str.contains(query, case=False)]
+            if not search_res.empty:
+                search_res.loc[:, "type"] = "attraction"
+            search_res = search_res.to_dict(orient="records")
+
         return search_res
 
 
-
 if __name__ == "__main__":
-    # print(get_attr_details(25555680)["reviews"])
-    # print(get_recommended_attr())
     dr = DataRetriever()
-    print(dr.get_search_result("Taj"))
+    print(dr.get_search_result("Maha", ""))
