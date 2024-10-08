@@ -21,7 +21,7 @@ class DataRetriever:
         state_info = filtered_state["STATE_INFO"].values[0]
         state_image = filtered_state["STATE_IMAGE"].values[0]
         attr_filtered = self.attr_df[self.attr_df["state_id"] == state_id]
-        attr_filtered = attr_filtered[["id", "name", "cover_img"]]
+        attr_filtered = attr_filtered[["id", "name", "cover_img", "city_name"]]
         attr_filtered_dict = attr_filtered.to_dict(orient="records")
         return {"state_data": {"state_name": state_name, "state_capital": state_capital, "state_info": state_info, "state_image": state_image}, "attr_data": attr_filtered_dict}
 
