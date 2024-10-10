@@ -65,7 +65,13 @@ class DataRetriever:
 
         return search_res
 
+    def get_liked_attr(self, liked_ids: list):
+        liked_attr = self.attr_df.loc[self.attr_df['id'].isin(liked_ids)]
+        liked_dict = liked_attr.to_dict(orient="records")
+        return liked_dict
+
 
 if __name__ == "__main__":
     dr = DataRetriever()
-    print(dr.get_search_result("Maha", ""))
+    # print(dr.get_search_result("Maha", ""))
+    # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))

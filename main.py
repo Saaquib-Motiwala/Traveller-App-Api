@@ -1,8 +1,13 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 from helpers import DataRetriever
 
 app = FastAPI()
 dr = DataRetriever()
+
+
+class LikedList(BaseModel):
+    likedlist: list
 
 @app.get("/")
 async def root():
@@ -41,7 +46,12 @@ async def states(state_id: int):
 @app.get("/attractions/{attr_id}")
 async def attractions(attr_id: int):
     attr_details = dr.get_attr_details(attr_id)
-    return {"data": attr_details}
+    return {"data": attr_details}\
+
+@app.post("/liked")
+async def liked(liked: LikedList):
+    liked_attr = dr.get_liked_attr(liked.likedlist)
+    return {"data": liked_attr}
 
 
 
