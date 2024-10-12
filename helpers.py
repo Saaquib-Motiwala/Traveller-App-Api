@@ -8,6 +8,8 @@ class DataRetriever:
     def __init__(self):
         self.state_df = pd.read_csv("states_info.csv")
         self.attr_df = pd.read_csv("attraction_details.csv")
+        with open("tags.json", "r") as file:
+            self.tags_dict = json.load(file)
 
     def get_states_list(self):
         states_list = self.state_df.to_dict(orient="split")
@@ -67,12 +69,24 @@ class DataRetriever:
 
     def get_liked_attr(self, liked_ids: list):
         liked_attr = self.attr_df.loc[self.attr_df['id'].isin(liked_ids)]
-        liked_attr = liked_attr.loc[:, ["id", "name", "state_name", 'cover_img']]
+        liked_attr = liked_attr.loc[:, ["id", "name", "city_name", "state_name", 'cover_img']]
         liked_dict = liked_attr.to_dict(orient="records")
         return liked_dict
+
+    def get_category_attr(self, category_id: int):
+        category_map = {
+            1: "Beaches"
+        }
+        attr_id_list = self.tags_dict[category_map[category_id]]
+        filtered_attr = self.attr_df.loc[self.attr_df["id"].isin(attr_id_list)]
+        filtered_attr = filtered_attr.sort_values("ratings")
+        filtered_attr = filtered_attr.loc[:, ["id", "name", "city_name", "state_name", 'cover_img']]
+        filtered_dict = filtered_attr.to_dict(orient="records")
+        return filtered_dict
 
 
 if __name__ == "__main__":
     dr = DataRetriever()
     # print(dr.get_search_result("Maha", ""))
-    print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
+    # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
+    print(dr.get_category_attr(1))

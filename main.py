@@ -48,6 +48,11 @@ async def attractions(attr_id: int):
     attr_details = dr.get_attr_details(attr_id)
     return {"data": attr_details}\
 
+@app.get("/category/{category_id}")
+async def attractions(category_id: int):
+    attr_details = dr.get_category_attr(category_id)
+    return {"data": attr_details}
+
 @app.post("/liked")
 async def liked(liked: LikedList):
     liked_attr = dr.get_liked_attr(liked.likedlist)
