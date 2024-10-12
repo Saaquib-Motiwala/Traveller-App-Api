@@ -86,7 +86,7 @@ class DataRetriever:
         ]
         attr_id_list = self.tags_dict[category_map[category_id]]
         filtered_attr = self.attr_df.loc[self.attr_df["id"].isin(attr_id_list)]
-        filtered_attr = filtered_attr.sort_values("ratings")
+        filtered_attr = filtered_attr.sort_values("review_count")
         filtered_attr = filtered_attr.loc[:, ["id", "name", "city_name", "state_name", 'cover_img']]
         filtered_dict = filtered_attr.to_dict(orient="records")
         return filtered_dict
