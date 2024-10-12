@@ -74,9 +74,16 @@ class DataRetriever:
         return liked_dict
 
     def get_category_attr(self, category_id: int):
-        category_map = {
-            1: "Beaches"
-        }
+        category_map = [
+            "Hiking Trails",
+            "Religious Sites",
+            "Beaches",
+            "Mountains",
+            "Historic Sites",
+            "Natural History Museums",
+            "National Parks",
+            "Nature & Wildlife Areas"
+        ]
         attr_id_list = self.tags_dict[category_map[category_id]]
         filtered_attr = self.attr_df.loc[self.attr_df["id"].isin(attr_id_list)]
         filtered_attr = filtered_attr.sort_values("ratings")
@@ -89,4 +96,4 @@ if __name__ == "__main__":
     dr = DataRetriever()
     # print(dr.get_search_result("Maha", ""))
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
-    print(dr.get_category_attr(1))
+    print(dr.get_category_attr(7))
