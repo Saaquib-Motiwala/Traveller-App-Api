@@ -8,6 +8,16 @@ class DataRetriever:
     def __init__(self):
         self.state_df = pd.read_csv("states_info.csv")
         self.attr_df = pd.read_csv("attraction_details.csv")
+        self.category_map = [
+            "Hiking Trails",
+            "Religious Sites",
+            "Beaches",
+            "Mountains",
+            "Historic Sites",
+            "Natural History Museums",
+            "National Parks",
+            "Nature & Wildlife Areas"
+        ]
         with open("tags.json", "r") as file:
             self.tags_dict = json.load(file)
 
@@ -41,7 +51,8 @@ class DataRetriever:
         recomm_dict = recomm_attr.to_dict(orient="records")
         return recomm_dict
 
-    def get_search_result(self, query, type):
+    def get_search_result(self, query: str, type):
+        query = query.rstrip()
         if type == "all":
             state_search_res = self.state_df[self.state_df["STATE_NAME"].str.contains(query, case=False)]
             if not state_search_res.empty:
@@ -74,17 +85,8 @@ class DataRetriever:
         return liked_dict
 
     def get_category_attr(self, category_id: int):
-        category_map = [
-            "Hiking Trails",
-            "Religious Sites",
-            "Beaches",
-            "Mountains",
-            "Historic Sites",
-            "Natural History Museums",
-            "National Parks",
-            "Nature & Wildlife Areas"
-        ]
-        attr_id_list = self.tags_dict[category_map[category_id]]
+
+        attr_id_list = self.tags_dict[self.category_map[category_id]]
         filtered_attr = self.attr_df.loc[self.attr_df["id"].isin(attr_id_list)]
         filtered_attr = filtered_attr.sort_values("review_count", ascending=False)
         filtered_attr = filtered_attr.loc[:, ["id", "name", "city_name", "state_name", 'cover_img']]
@@ -93,8 +95,8 @@ class DataRetriever:
 
 
 if __name__ == "__main__":
-    # dr = DataRetriever()
-    # print(dr.get_search_result("Maha", ""))
+    dr = DataRetriever()
+    # print(dr.get_search_result("Maha   ", "all"))
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
     # print(dr.get_category_attr(1))
     pass
