@@ -51,7 +51,7 @@ class DataRetriever:
             attr_id_list.extend(self.tags_dict[self.category_map[rec_id]])
 
         recomm_attr = self.attr_df.loc[self.attr_df['id'].isin(attr_id_list)]
-        recomm_attr = recomm_attr.sort_values(by="review_count")
+        recomm_attr = recomm_attr.sort_values(by="review_count", ascending=False)
         recomm_attr = recomm_attr.head(10)
         recomm_dict = recomm_attr.to_dict(orient="records")
         return recomm_dict
