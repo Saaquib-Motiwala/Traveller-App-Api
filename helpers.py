@@ -104,5 +104,5 @@ if __name__ == "__main__":
     # print(dr.get_search_result("Maha   ", "all"))
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
     # print(dr.get_category_attr(1))
-    print(dr.get_recommended_attr([0,1]))
-    # pass
+    # print(dr.get_recommended_attr([0,1]))
+    pass
