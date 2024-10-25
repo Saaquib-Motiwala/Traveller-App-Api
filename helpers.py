@@ -45,9 +45,14 @@ class DataRetriever:
         attr_dict = attr.to_dict(orient="records")[0]
         return attr_dict
 
-    def get_recommended_attr(self):
-        lst = [317329, 319875, 311667, 319695, 2704519, 12687575, 320061, 321437, 2697362, 1491020]
-        recomm_attr = self.attr_df.loc[self.attr_df['id'].isin(lst)]
+    def get_recommended_attr(self, rec_ids):
+        attr_id_list = []
+        for rec_id in rec_ids:
+            attr_id_list.extend(self.tags_dict[self.category_map[rec_id]])
+
+        recomm_attr = self.attr_df.loc[self.attr_df['id'].isin(attr_id_list)]
+        recomm_attr = recomm_attr.sort_values(by="review_count")
+        recomm_attr = recomm_attr.head(10)
         recomm_dict = recomm_attr.to_dict(orient="records")
         return recomm_dict
 
@@ -95,8 +100,9 @@ class DataRetriever:
 
 
 if __name__ == "__main__":
-    # dr = DataRetriever()
+    dr = DataRetriever()
     # print(dr.get_search_result("Maha   ", "all"))
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
     # print(dr.get_category_attr(1))
-    pass
+    print(dr.get_recommended_attr([0,1]))
+    # pass

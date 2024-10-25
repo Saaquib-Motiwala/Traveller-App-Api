@@ -9,6 +9,10 @@ dr = DataRetriever()
 class LikedList(BaseModel):
     likedlist: list
 
+
+class RecommendedList(BaseModel):
+    recommListId: list
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -25,9 +29,9 @@ async def states():
     return {"data": states_list}
 
 
-@app.get("/recommended_attr/")
-async def states():
-    recomm_dict = dr.get_recommended_attr()
+@app.post("/recommended_attr/")
+async def states(recs: RecommendedList):
+    recomm_dict = dr.get_recommended_attr(recs.recommListId)
     return {"data": recomm_dict}
 
 
@@ -46,7 +50,7 @@ async def states(state_id: int):
 @app.get("/attractions/{attr_id}")
 async def attractions(attr_id: int):
     attr_details = dr.get_attr_details(attr_id)
-    return {"data": attr_details}\
+    return {"data": attr_details}
 
 @app.get("/category/{category_id}")
 async def attractions(category_id: int):
