@@ -13,6 +13,10 @@ class LikedList(BaseModel):
 class RecommendedList(BaseModel):
     recommListId: list
 
+
+class Ai(BaseModel):
+    prompt: str
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -62,6 +66,7 @@ async def liked(liked: LikedList):
     liked_attr = dr.get_liked_attr(liked.likedlist)
     return {"data": liked_attr}
 
-
-
-
+@app.post("/itinerary")
+async def ai(ai: Ai):
+    itinerary = dr.get_ai_itinerary(ai.prompt)
+    return {"data": itinerary}

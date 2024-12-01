@@ -1,13 +1,31 @@
 import pandas as pd
 from ast import literal_eval
 import json
-import requests
+import re
+import g4f
+
 
 
 class DataRetriever:
     def __init__(self):
         self.state_df = pd.read_csv("states_info.csv")
         self.attr_df = pd.read_csv("attraction_details.csv")
+        self.sys_prompt = """You are an expert travel itinerary planner. Create a detailed day-wise itinerary for a trip to a specific destination. Ensure the itinerary follows a particular theme and includes relevant activities.
+
+Instructions:
+Trip Details:
+
+Number of Days: [NUMBER OF DAYS]
+Destination: [DESTINATION]
+Theme: [TYPE OF VACATION] (e.g., adventure, cultural, relaxation)
+Activity Suggestions:
+
+List relevant activities (e.g., hiking, historical tours, beach lounging).
+Daily Format:
+Return the itinerary as a Python list of dictionaries. Each dictionary should represent a day and include:
+
+"day": The day number (e.g., "Day 1").
+"description": A detailed summary of the day's activities."""
         self.category_map = [
             "Hiking Trails",
             "Religious Sites",
@@ -98,6 +116,15 @@ class DataRetriever:
         filtered_dict = filtered_attr.to_dict(orient="records")
         return filtered_dict
 
+    def get_ai_itinerary(self, prompt: str):
+        response = g4f.ChatCompletion.create(
+            model=g4f.models.gpt_4,
+                messages=[{"role": "system", "content": self.sys_prompt}, {"role": "user", "content": f"{prompt}"}],
+        )
+
+        response_match = re.search(r'\[(.*\n)*\]', response)
+        return eval(response_match.group(0))
+
 
 if __name__ == "__main__":
     dr = DataRetriever()
@@ -105,4 +132,5 @@ if __name__ == "__main__":
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
     # print(dr.get_category_attr(1))
     # print(dr.get_recommended_attr([0,1]))
+    print(dr.get_ai_resp("Manali for 2 days and leisure trip"))
     pass
