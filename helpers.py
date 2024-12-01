@@ -116,8 +116,8 @@ Return the itinerary as a Python list of dictionaries. Each dictionary should re
         filtered_dict = filtered_attr.to_dict(orient="records")
         return filtered_dict
 
-    def get_ai_itinerary(self, prompt: str):
-        response = g4f.ChatCompletion.create(
+    async def get_ai_itinerary(self, prompt: str):
+        response = await g4f.ChatCompletion.create_async(
             model=g4f.models.gpt_4,
                 messages=[{"role": "system", "content": self.sys_prompt}, {"role": "user", "content": f"{prompt}"}],
         )
@@ -132,5 +132,5 @@ if __name__ == "__main__":
     # print(dr.get_liked_attr([1491020, 2704519, 317329, 319875, 321437]))
     # print(dr.get_category_attr(1))
     # print(dr.get_recommended_attr([0,1]))
-    print(dr.get_ai_resp("Manali for 2 days and leisure trip"))
+    # print(dr.get_ai_resp("Manali for 2 days and leisure trip"))
     pass

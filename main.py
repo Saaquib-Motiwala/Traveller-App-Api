@@ -68,5 +68,5 @@ async def liked(liked: LikedList):
 
 @app.post("/itinerary")
 async def ai(ai: Ai):
-    itinerary = dr.get_ai_itinerary(ai.prompt)
+    itinerary = await dr.get_ai_itinerary(ai.prompt)
     return {"data": itinerary}
